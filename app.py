@@ -53,7 +53,7 @@ class Food(Resource):
         get endpoint
         ---      
         tags:
-          - Flask Restful API
+          - Food API Endpoint
         parameters:
           - name: food_name
             in: path
