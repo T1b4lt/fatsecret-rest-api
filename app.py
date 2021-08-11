@@ -7,6 +7,7 @@ import requests
 from flask import Flask, request, Response, jsonify
 from flask_restful import Api, Resource, reqparse
 from flasgger import Swagger, swag_from
+from resources.food import Food
 
 
 # Setup Flask Server
@@ -47,7 +48,7 @@ class Welcome(Resource):
     return "Visit /swagger"
 
 
-class Food(Resource):
+class FoodEndpoint(Resource):
     def get(self, food_name):
         """
         get endpoint
@@ -72,17 +73,18 @@ class Food(Resource):
                   type: string
                   description: Type of object
                 food_name:
-                  type: string
+                  type: food
                   description: The food we are looking for           
         """
+        food_object = Food(food_name)
         return jsonify({
             "type": 'food',
-            "food_name": food_name
+            "food_object": food_object.to_json()
         })
 
 
 # Api resource routing
-api.add_resource(Food, '/food/<string:food_name>')
+api.add_resource(FoodEndpoint, '/food/<string:food_name>')
 api.add_resource(Welcome, '/')
 
 
