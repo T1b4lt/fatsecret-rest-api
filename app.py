@@ -36,6 +36,16 @@ swagger = Swagger(app, template=template)
 app.config.from_object(config.Config)
 api = Api(app)
 
+class Welcome(Resource):
+  def get(self):
+    """
+    get endpoint
+    ---
+    tags:
+     - Welcome endpoint
+    """
+    return "Visit /swagger"
+
 
 class Food(Resource):
     def get(self, food_name):
@@ -73,6 +83,7 @@ class Food(Resource):
 
 # Api resource routing
 api.add_resource(Food, '/food/<string:food_name>')
+api.add_resource(Welcome, '/')
 
 
 if __name__ == "__main__":
