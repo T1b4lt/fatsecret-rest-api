@@ -56,6 +56,11 @@ class FoodEndpoint(Resource):
         tags:
           - Food API Endpoint
         parameters:
+          - name: lang
+            in: path
+            type: string
+            required: true
+            description: language of the food_name
           - name: food_name
             in: path
             type: string
@@ -72,6 +77,9 @@ class FoodEndpoint(Resource):
                 type:
                   type: string
                   description: Type of object
+                lang:
+                  type: string
+                  description: Language of the petition
                 food_name:
                   type: food
                   description: The food we are looking for           
@@ -84,7 +92,7 @@ class FoodEndpoint(Resource):
 
 
 # Api resource routing
-api.add_resource(FoodEndpoint, '/food/<string:food_name>')
+api.add_resource(FoodEndpoint, '/food/<string:lang>/<string:food_name>')
 api.add_resource(Welcome, '/')
 
 
