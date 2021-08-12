@@ -7,7 +7,7 @@ import requests
 from flask import Flask, request, Response, jsonify
 from flask_restful import Api, Resource, reqparse
 from flasgger import Swagger, swag_from
-from resources.food import Food
+from utils.es_utils import es_get_food
 
 
 # Setup Flask Server
@@ -49,7 +49,7 @@ class Welcome(Resource):
 
 
 class FoodEndpoint(Resource):
-    def get(self, food_name):
+    def get(self, lang, food_name):
         """
         get endpoint
         ---      
@@ -60,7 +60,7 @@ class FoodEndpoint(Resource):
             in: path
             type: string
             required: true
-            description: language of the food_name
+            description: language of the food_name (es)
           - name: food_name
             in: path
             type: string
@@ -84,11 +84,12 @@ class FoodEndpoint(Resource):
                   type: food
                   description: The food we are looking for           
         """
-        food_object = Food(food_name)
-        return jsonify({
+        if lang == 'es':
+          food_obj = es_get_food(food_name)
+          return jsonify({
             "type": 'food',
-            "food_object": food_object.to_json()
-        })
+            "food_object": food_obj.to_json()
+            })
 
 
 # Api resource routing
