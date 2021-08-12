@@ -9,4 +9,4 @@ class Food:
         self.quantity = 0.0
 
     def to_json(self):
-        return dict(title=self.food_name)
+        return dict(food_name=self.food_name, protein=self.protein, carbs=self.carbs, fat=self.fat, kcal=self.kcal, unit=self.unit, quantity=self.quantity)
