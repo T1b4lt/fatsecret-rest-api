@@ -50,7 +50,7 @@ class FoodEndpoint(Resource):
             in: path
             type: string
             required: true
-            description: language of the food_name (es)
+            description: language of the food_name (supported: es)
           - name: food_name
             in: path
             type: string
