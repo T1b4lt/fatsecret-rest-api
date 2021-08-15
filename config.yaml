@@ -1,3 +1,4 @@
+port: 5000
 countries:
  es:
   domain: es

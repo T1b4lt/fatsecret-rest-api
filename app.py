@@ -98,4 +98,4 @@ api.add_resource(FoodEndpoint, '/food/<string:country>/<string:food_name>')
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=config_data['port'])
