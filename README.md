@@ -58,7 +58,7 @@ source fatsecret_env/bin/activate
 ````
 4. Install all dependencies:
 ````
-pip install requirements.txt
+pip install -r requirements.txt
 ````
 5. Run app.py
 ````
