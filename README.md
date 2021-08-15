@@ -64,7 +64,7 @@ pip install -r requirements.txt
 ````
 python app.py
 ````
-6. Visit [Swagger Doc](localhost:5000) at *localhost:5000*
+6. Visit [Swagger Doc](http://localhost:5000) at *localhost:5000*
 
 
 
