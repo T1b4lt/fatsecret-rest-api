@@ -1,6 +1,7 @@
 class Food:
     def __init__(self, food_name):
         self.food_name = food_name
+        self.food_brand = ''
         self.protein = 0.0
         self.carbs = 0.0
         self.fat = 0.0
