@@ -43,18 +43,18 @@ config_data = yaml.load(config_file, Loader=yaml.FullLoader)
 
 
 class FoodEndpoint(Resource):
-    def get(self, lang, food_name):
+    def get(self, country, food_name):
         """
         get endpoint
         ---      
         tags:
           - Food API Endpoint
         parameters:
-          - name: lang
+          - name: country
             in: path
             type: string
             required: true
-            description: language of the food_name (supported [en, es])
+            description: country from which you want the information (supported [us, es])
           - name: food_name
             in: path
             type: string
@@ -71,27 +71,30 @@ class FoodEndpoint(Resource):
                 type:
                   type: string
                   description: Type of object
-                lang:
+                country:
                   type: string
-                  description: Language of the petition
-                food_name:
-                  type: food
-                  description: The food we are looking for           
+                  description: Country from which you want the information
+                food_array:
+                  type: array of food_objects
+                  description: Array of food_objects
+                timestamp:
+                  type: timestamp
+                  description: Timestamp of petition           
         """
-        url_domain = config_data['langs'][lang]['domain']
-        url_resource = config_data['langs'][lang]['resource']
+        url_domain = config_data['countries'][country]['domain']
+        url_resource = config_data['countries'][country]['resource']
         food_name = food_name.replace(' ', '+')
         food_array = get_food(url_domain, url_resource, food_name)
         return jsonify({
             "type": 'food',
-            "lang": lang,
+            "country": country,
             "food_array": [food_obj.to_json() for food_obj in food_array],
             "timestamp": time.time()
         })
 
 
 # Api resource routing
-api.add_resource(FoodEndpoint, '/food/<string:lang>/<string:food_name>')
+api.add_resource(FoodEndpoint, '/food/<string:country>/<string:food_name>')
 
 
 if __name__ == "__main__":

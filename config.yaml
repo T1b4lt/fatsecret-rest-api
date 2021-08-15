@@ -1,7 +1,7 @@
-langs:
+countries:
  es:
   domain: es
   resource: calorías-nutrición
- en:
+ us:
   domain: com
   resource: calories-nutrition

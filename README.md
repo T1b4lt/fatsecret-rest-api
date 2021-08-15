@@ -12,15 +12,15 @@ Its main purpose is to return nutritional information about the food you are req
 
 The main petition is as follows,
 ````
-/food/{lang}/{food_name}
+/food/{country}/{food_name}
 ````
-where _lang_ indicates the language in which you are making the request and _food_name_ the name of the food you are looking for information.
+where _country_ indicates the country from which you want the information and _food_name_ the name of the food you are looking for information.
 
 The response of the API is as follows,
 ````
 {
     "type": 'food',
-    "lang": <lang>, [Actually EN and ES are supported]
+    "country": <country>, [Actually US and ES are supported]
     "timestamp": <timestamp>,
     "food_array": [array, of, food, objects]
 }
@@ -64,6 +64,7 @@ pip install -r requirements.txt
 ````
 python app.py
 ````
+6. Visit [Swagger Doc](localhost:5000) at *localhost:5000*
 
 
 
