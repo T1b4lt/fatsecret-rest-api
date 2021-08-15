@@ -53,7 +53,7 @@ class FoodEndpoint(Resource):
             in: path
             type: string
             required: true
-            description: language of the food_name (supported: es)
+            description: language of the food_name (supported [es])
           - name: food_name
             in: path
             type: string
@@ -79,6 +79,7 @@ class FoodEndpoint(Resource):
         """
         url_domain = config_data['langs'][lang]['domain']
         url_resource = config_data['langs'][lang]['resource']
+        food_name = food_name.replace(' ', '+')
         food_array = get_food(url_domain, url_resource, food_name)
         return jsonify({
             "type": 'food',
