@@ -8,6 +8,7 @@ from flask import Flask, request, Response, jsonify
 from flask_restful import Api, Resource, reqparse
 from flasgger import Swagger, swag_from
 from utils.es_utils import es_get_food
+import yaml
 
 
 # Setup Flask Server
@@ -36,6 +37,9 @@ app.config['SWAGGER'] = {
 swagger = Swagger(app, template=template)
 app.config.from_object(config.Config)
 api = Api(app)
+config_file = open('config.yaml')
+config_data = yaml.load(config_file, Loader=yaml.FullLoader)
+print(config_data['langs']['es'])
 
 
 class FoodEndpoint(Resource):
