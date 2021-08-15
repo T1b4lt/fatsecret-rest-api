@@ -44,6 +44,15 @@ def get_food(url_domain, url_resource, food_name):
     dom = etree.HTML(str(soup))
     result_rows = dom.xpath('//table[@class="generic searchResult"]//tr')
     result = [get_info(row, url_domain) for row in result_rows]
-
-    food_obj = Food(food_name)
-    return food_obj
+    food_array = []
+    for element in result:
+        food_obj = Food(element[0])
+        food_obj.food_brand = element[1]
+        food_obj.quantity = element[2]
+        food_obj.unit = element[3]
+        food_obj.kcal = element[4]
+        food_obj.fat = element[5]
+        food_obj.carbs = element[6]
+        food_obj.protein = element[7]
+        food_array.append(food_obj)
+    return food_array
