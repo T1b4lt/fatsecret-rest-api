@@ -9,6 +9,7 @@ from flask_restful import Api, Resource, reqparse
 from flasgger import Swagger, swag_from
 from utils.utils import get_food
 import yaml
+import time
 
 
 # Setup Flask Server
@@ -84,7 +85,8 @@ class FoodEndpoint(Resource):
         return jsonify({
             "type": 'food',
             "lang": lang,
-            "food_array": [food_obj.to_json() for food_obj in food_array]
+            "food_array": [food_obj.to_json() for food_obj in food_array],
+            "timestamp": time.time()
         })
 
 
