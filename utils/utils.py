@@ -3,9 +3,11 @@ from bs4 import BeautifulSoup
 import requests
 import re
 from lxml import etree
+import unidecode
 
 def get_info_es(food_info):
     food_info = food_info.replace(',', '.')
+    food_info = unidecode.unidecode(food_info)
     unit_quantity_part = food_info.split('-')[0]
     macro_nutrient_part = food_info.split('-')[1]
     array_macro = [re.findall("\d+\.?\d+", part)
