@@ -2,6 +2,6 @@ langs:
  es:
   domain: es
   resource: calorías-nutrición
-en:
+ en:
   domain: com
   resource: calories-nutrition
