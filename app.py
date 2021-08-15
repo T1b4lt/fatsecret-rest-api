@@ -7,7 +7,8 @@ import requests
 from flask import Flask, request, Response, jsonify
 from flask_restful import Api, Resource, reqparse
 from flasgger import Swagger, swag_from
-from utils.es_utils import es_get_food
+from utils.utils import get_food
+import yaml
 
 
 # Setup Flask Server
@@ -36,6 +37,8 @@ app.config['SWAGGER'] = {
 swagger = Swagger(app, template=template)
 app.config.from_object(config.Config)
 api = Api(app)
+config_file = open('config.yaml')
+config_data = yaml.load(config_file, Loader=yaml.FullLoader)
 
 
 class FoodEndpoint(Resource):
@@ -50,7 +53,7 @@ class FoodEndpoint(Resource):
             in: path
             type: string
             required: true
-            description: language of the food_name (supported: es)
+            description: language of the food_name (supported [es])
           - name: food_name
             in: path
             type: string
@@ -74,13 +77,15 @@ class FoodEndpoint(Resource):
                   type: food
                   description: The food we are looking for           
         """
-        if lang == 'es':
-            food_obj = es_get_food(food_name)
-            return jsonify({
-                "type": 'food',
-                "lang": lang,
-                "food_object": food_obj.to_json()
-            })
+        url_domain = config_data['langs'][lang]['domain']
+        url_resource = config_data['langs'][lang]['resource']
+        food_name = food_name.replace(' ', '+')
+        food_array = get_food(url_domain, url_resource, food_name)
+        return jsonify({
+            "type": 'food',
+            "lang": lang,
+            "food_array": [food_obj.to_json() for food_obj in food_array]
+        })
 
 
 # Api resource routing
