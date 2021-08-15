@@ -83,7 +83,7 @@ class FoodEndpoint(Resource):
         return jsonify({
             "type": 'food',
             "lang": lang,
-            "food_object": food_obj.to_json()
+            "food_array": food_obj.to_json()
         })
 
 
