@@ -79,11 +79,11 @@ class FoodEndpoint(Resource):
         """
         url_domain = config_data['langs'][lang]['domain']
         url_resource = config_data['langs'][lang]['resource']
-        food_obj = get_food(url_domain, url_resource, food_name)
+        food_array = get_food(url_domain, url_resource, food_name)
         return jsonify({
             "type": 'food',
             "lang": lang,
-            "food_array": food_obj.to_json()
+            "food_array": [food_obj.to_json() for food_obj in food_array]
         })
 
 
