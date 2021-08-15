@@ -31,21 +31,11 @@ template = {
 app.config['SWAGGER'] = {
     'title': 'Fatsecret API',
     'uiversion': 3,
-    "specs_route": "/swagger/"
+    "specs_route": "/"
 }
 swagger = Swagger(app, template=template)
 app.config.from_object(config.Config)
 api = Api(app)
-
-class Welcome(Resource):
-  def get(self):
-    """
-    get endpoint
-    ---
-    tags:
-     - Welcome endpoint
-    """
-    return "Visit /swagger"
 
 
 class FoodEndpoint(Resource):
@@ -85,16 +75,16 @@ class FoodEndpoint(Resource):
                   description: The food we are looking for           
         """
         if lang == 'es':
-          food_obj = es_get_food(food_name)
-          return jsonify({
-            "type": 'food',
-            "food_object": food_obj.to_json()
+            food_obj = es_get_food(food_name)
+            return jsonify({
+                "type": 'food',
+                "lang": lang,
+                "food_object": food_obj.to_json()
             })
 
 
 # Api resource routing
 api.add_resource(FoodEndpoint, '/food/<string:lang>/<string:food_name>')
-api.add_resource(Welcome, '/')
 
 
 if __name__ == "__main__":
