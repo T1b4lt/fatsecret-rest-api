@@ -22,7 +22,7 @@ template = {
     "info": {
         "title": "Fatsecret API",
         "description": "A Restful API for Fatsecret food info",
-        "version": "0.1.1",
+        "version": "1.0.0",
         "contact": {
             "name": "T1b4lt",
             "github": "https://github.com/T1b4lt",
